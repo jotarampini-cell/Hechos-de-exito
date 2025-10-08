@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { SuccessFactCard } from "@/components/success-fact-card"
 import { CategoryFilter } from "@/components/category-filter"
 import { ModernLoading } from "@/components/modern-loading"
+import { ThemeSwitch } from "@/components/theme-switch"
 import { Sparkles, TrendingUp, Lightbulb } from "lucide-react"
 import { generateSuccessFact, SuccessFact } from "@/lib/gemini"
 
@@ -443,6 +444,9 @@ export default function Home() {
           </p>
         </div>
       </footer>
+
+      {/* Theme Switch */}
+      <ThemeSwitch />
     </main>
   )
 }

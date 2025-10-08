@@ -3,6 +3,69 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Transiciones suaves para cambio de tema */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Mejoras para modo oscuro */
+.dark {
+  /* Fondo con gradiente sutil */
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.dark .gradient-bg {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+}
+
+/* Títulos en modo oscuro */
+.dark .title-premium {
+  color: #f8fafc;
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.dark .title-premium::before {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981);
+}
+
+.dark .title-premium::after {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981);
+}
+
+/* Subtítulos en modo oscuro */
+.dark .subtitle-premium {
+  color: #cbd5e1;
+}
+
+.dark .subtitle-premium::before {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+}
+
+/* Botones premium en modo oscuro */
+.dark .premium-button {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 1px solid #475569;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.dark .premium-button:hover {
+  background: linear-gradient(135deg, #334155 0%, #475569 100%);
+  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
+}
+
+/* Cards en modo oscuro */
+.dark .bg-card {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+/* Loading screen en modo oscuro */
+.dark .bg-card\/95 {
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(71, 85, 105, 0.2);
+}
+
 :root {
   /* Tema moderno inspirado en Google con colores vibrantes */
   --background: oklch(0.99 0.005 106);
