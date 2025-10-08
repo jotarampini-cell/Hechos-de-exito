@@ -1,4 +1,9 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import { SuccessFactCard } from "@/components/success-fact-card"
+import { CategoryFilter } from "@/components/category-filter"
+import { ModernLoading } from "@/components/modern-loading"
 import { Sparkles, TrendingUp, Lightbulb } from "lucide-react"
 import { generateSuccessFact, SuccessFact } from "@/lib/gemini"
 
@@ -9,6 +14,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Bezos identificó que internet crecía un 2,300% anual y decidió actuar inmediatamente. No esperó el momento perfecto, sino que comenzó con un producto simple (libros) para validar su visión del comercio electrónico.",
     keyTakeaway:
       "Empieza con un producto mínimo viable en un mercado en crecimiento. La perfección es enemiga del progreso.",
+    categories: ["startup", "tecnologia", "estrategia"],
+    industry: "Comercio Electrónico",
+    lessonType: "Visión y Estrategia"
   },
   "1-9": {
     event:
@@ -17,6 +25,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Apple no inventó el teléfono móvil, pero reimaginó completamente la experiencia del usuario. Jobs combinó tres productos en uno: teléfono, iPod y navegador web, creando una categoría completamente nueva.",
     keyTakeaway:
       "La innovación no siempre es inventar algo nuevo, sino mejorar radicalmente lo que ya existe enfocándose en la experiencia del usuario.",
+    categories: ["innovacion", "tecnologia", "liderazgo"],
+    industry: "Hardware",
+    lessonType: "Innovación"
   },
   "2-4": {
     event:
@@ -120,7 +131,7 @@ const successFacts: Record<string, SuccessFact> = {
   },
 }
 
-async function getTodaysFact(): Promise<{ date: string; fact: SuccessFact }> {
+async function getTodaysFact(selectedCategories?: string[]): Promise<{ date: string; fact: SuccessFact }> {
   const today = new Date()
   const month = today.getMonth() + 1
   const day = today.getDate()
@@ -148,7 +159,7 @@ async function getTodaysFact(): Promise<{ date: string; fact: SuccessFact }> {
 
   // Siempre intentar generar con Gemini primero
   try {
-    const fact = await generateSuccessFact(formattedDate)
+    const fact = await generateSuccessFact(formattedDate, selectedCategories)
     // Eliminar factCache y clearFactCache
     return { date: formattedDate, fact }
   } catch (error) {
@@ -169,6 +180,9 @@ async function getTodaysFact(): Promise<{ date: string; fact: SuccessFact }> {
         "Cada día es una oportunidad para aprender de los grandes éxitos del pasado y aplicar esas lecciones a tu propio emprendimiento. Los patrones del éxito se repiten: visión clara, ejecución rápida, enfoque en el cliente y perseverancia.",
       keyTakeaway:
         "El éxito empresarial no es suerte, es el resultado de decisiones estratégicas consistentes. Estudia el pasado, actúa en el presente, construye el futuro.",
+      categories: ["estrategia", "liderazgo"],
+      industry: "General",
+      lessonType: "Visión y Estrategia"
     }
     
     // Eliminar factCache y clearFactCache
@@ -176,8 +190,115 @@ async function getTodaysFact(): Promise<{ date: string; fact: SuccessFact }> {
   }
 }
 
-export default async function Home() {
-  const { date, fact } = await getTodaysFact()
+export default function Home() {
+  const [date, setDate] = useState("")
+  const [fact, setFact] = useState<SuccessFact | null>(null)
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
+  const handleCategoryChange = async (categories: string[]) => {
+    setSelectedCategories(categories)
+    
+    // Siempre mostrar loading cuando cambiamos de categoría
+    setIsLoading(true)
+    setIsTransitioning(false)
+    
+    try {
+      const result = await getTodaysFact(categories.length > 0 ? categories : undefined)
+      
+      // Delay mínimo para mostrar el loading dinámico
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      
+      setDate(result.date)
+      setFact(result.fact)
+    } catch (error) {
+      console.error('Error cargando hecho del día:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    const loadTodaysFact = async () => {
+      setIsLoading(true)
+      try {
+        const result = await getTodaysFact(selectedCategories.length > 0 ? selectedCategories : undefined)
+        setDate(result.date)
+        setFact(result.fact)
+      } catch (error) {
+        console.error('Error cargando hecho del día:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    loadTodaysFact()
+  }, [])
+
+  if (isLoading && !fact) {
+    return (
+      <main className="min-h-screen bg-background gradient-bg">
+        <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
+          <div className="flex flex-col items-center gap-12">
+            {/* Header */}
+            <div className="text-center space-y-4 max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full backdrop-blur-sm">
+                <Sparkles className="h-5 w-5 text-primary" />
+                <span className="text-sm font-medium text-primary">Para Empresarios Curiosos</span>
+              </div>
+
+              <div className="relative">
+                {/* Partículas flotantes alrededor del título */}
+                <div className="absolute -top-4 -left-4 w-2 h-2 bg-cyan-400/60 rounded-full animate-ping"></div>
+                <div className="absolute -top-2 -right-6 w-1 h-1 bg-blue-400/70 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                <div className="absolute -bottom-2 -left-8 w-1.5 h-1.5 bg-purple-400/50 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
+                <div className="absolute -bottom-4 -right-4 w-1 h-1 bg-cyan-300/60 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
+                <div className="absolute top-1/2 -left-12 w-0.5 h-0.5 bg-blue-300/80 rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
+                <div className="absolute top-1/2 -right-12 w-0.5 h-0.5 bg-purple-300/70 rounded-full animate-pulse" style={{animationDelay: '2.5s'}}></div>
+                
+                <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance title-premium relative z-20">
+                  <span className="word-animate relative z-30">Hechos</span>{" "}
+                  <span className="word-animate relative z-30">de</span>{" "}
+                  <span className="word-animate relative z-30">Éxito</span>
+                </h1>
+              </div>
+
+              <div className="relative">
+                {/* Resplandor de fondo para el subtítulo */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-blue-500/5 to-purple-500/5 rounded-2xl blur-sm opacity-0 animate-pulse" style={{animationDelay: '2s'}}></div>
+                
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed text-pretty subtitle-premium relative z-10 px-4 py-2">
+                  Descubre las lecciones empresariales más valiosas de la historia. Cada día, un nuevo aprendizaje que
+                  transformó industrias y creó imperios.
+                </p>
+              </div>
+            </div>
+
+            {/* Loading moderno */}
+            <div className="w-full max-w-4xl">
+              <ModernLoading 
+                message="Preparando tu dosis diaria de inspiración empresarial"
+                showProgress={true}
+              />
+            </div>
+          </div>
+        </div>
+      </main>
+    )
+  }
+
+  if (!fact) {
+    return (
+      <main className="min-h-screen bg-background gradient-bg">
+        <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
+          <div className="flex items-center justify-center min-h-[400px]">
+            <p className="text-muted-foreground">Error cargando el contenido</p>
+          </div>
+        </div>
+      </main>
+    )
+  }
 
   return (
     <main className="min-h-screen bg-background gradient-bg">
@@ -228,17 +349,49 @@ export default async function Home() {
             </div>
           </div>
 
+          {/* Filtro de Categorías */}
+          <div className="w-full max-w-4xl">
+            <CategoryFilter 
+              selectedCategories={selectedCategories}
+              onCategoriesChange={handleCategoryChange}
+            />
+          </div>
+
           {/* Success Fact Card */}
-          <SuccessFactCard date={date} fact={fact} />
+          <div className="w-full max-w-4xl mx-auto relative">
+            {isLoading ? (
+              <ModernLoading 
+                message={selectedCategories.length > 0 
+                  ? `Generando hecho personalizado para ${selectedCategories[0]}...`
+                  : "Generando hecho del día..."
+                }
+                showProgress={true}
+                categoryName={selectedCategories.length > 0 ? selectedCategories[0] : undefined}
+                isCategoryLoading={selectedCategories.length > 0}
+              />
+            ) : (
+              <div className="content-transition content-transition-entered">
+                <SuccessFactCard date={date} fact={fact} />
+              </div>
+            )}
+          </div>
 
           {/* Info Badge */}
-          <div className="text-center">
+          <div className="text-center space-y-3">
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-secondary/80 backdrop-blur-sm rounded-xl">
               <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
               <p className="text-sm text-muted-foreground">
-                Nueva lección empresarial cada día basada en hechos históricos
+                {selectedCategories.length > 0 
+                  ? `Hecho personalizado para: ${selectedCategories[0]}`
+                  : "Nueva lección empresarial cada día basada en hechos históricos"
+                }
               </p>
             </div>
+            {selectedCategories.length > 0 && (
+              <p className="text-xs text-muted-foreground max-w-md mx-auto">
+                💡 Selecciona una categoría diferente para obtener un hecho personalizado sobre ese tema específico
+              </p>
+            )}
           </div>
         </div>
       </div>

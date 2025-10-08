@@ -3,8 +3,9 @@
 import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Share2, Lightbulb, TrendingUp, Instagram, Quote } from "lucide-react"
+import { Share2, Lightbulb, TrendingUp, Instagram, Quote, Building2, Target } from "lucide-react"
 import { MotivationalQuoteDialog } from "@/components/motivational-quote-dialog"
+import { CategoryBadges } from "@/components/category-badge"
 
 interface SuccessFactCardProps {
   date: string
@@ -12,6 +13,9 @@ interface SuccessFactCardProps {
     event: string
     lesson: string
     keyTakeaway: string
+    categories: string[]
+    industry?: string
+    lessonType?: string
   }
 }
 
@@ -33,10 +37,35 @@ export function SuccessFactCard({ date, fact }: SuccessFactCardProps) {
   return (
     <Card className="w-full max-w-4xl mx-auto p-8 md:p-12 shadow-xl border-0 bg-card/95 backdrop-blur-sm">
       <div className="space-y-8">
-        {/* Header con fecha */}
-        <div className="flex items-center gap-3">
-          <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">{date}</p>
+        {/* Header con fecha y categorías */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">{date}</p>
+          </div>
+          
+          {/* Categorías */}
+          {fact.categories && fact.categories.length > 0 && (
+            <CategoryBadges categories={fact.categories} />
+          )}
+          
+          {/* Información adicional */}
+          {(fact.industry || fact.lessonType) && (
+            <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
+              {fact.industry && (
+                <div className="flex items-center gap-1">
+                  <Building2 className="h-3 w-3" />
+                  <span>{fact.industry}</span>
+                </div>
+              )}
+              {fact.lessonType && (
+                <div className="flex items-center gap-1">
+                  <Target className="h-3 w-3" />
+                  <span>{fact.lessonType}</span>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="space-y-3">

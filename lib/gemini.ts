@@ -28,6 +28,9 @@ export interface SuccessFact {
 	event: string
 	lesson: string
 	keyTakeaway: string
+	categories: string[]
+	industry?: string
+	lessonType?: string
 }
 
 export interface MotivationalQuote {
@@ -109,18 +112,26 @@ export async function generateMotivationalQuote(): Promise<MotivationalQuote> {
 	}
 }
 
-export async function generateSuccessFact(date: string): Promise<SuccessFact> {
+export async function generateSuccessFact(date: string, selectedCategories?: string[]): Promise<SuccessFact> {
 	try {
 		const model = getGenAI().getGenerativeModel({ model: 'gemini-2.0-flash-exp' })
 		
+		// Construir prompt con categorías específicas si están seleccionadas
+		const categoryContext = selectedCategories && selectedCategories.length > 0 
+			? `\nIMPORTANTE: El usuario está interesado específicamente en estas categorías: ${selectedCategories.join(', ')}. Prioriza generar un hecho que esté relacionado con al menos una de estas categorías.`
+			: ''
+
 		const prompt = `
-		Genera un hecho histórico empresarial para el ${date}. 
+		Genera un hecho histórico empresarial para el ${date}.${categoryContext}
 		
 		Responde ÚNICAMENTE en formato JSON con esta estructura exacta:
 		{
 			"event": "Descripción del hecho histórico empresarial específico para esta fecha",
 			"lesson": "La lección empresarial que se puede extraer de este hecho",
-			"keyTakeaway": "Cómo aplicar esta lección a un negocio actual"
+			"keyTakeaway": "Cómo aplicar esta lección a un negocio actual",
+			"categories": ["categoría1", "categoría2", "categoría3"],
+			"industry": "Industria principal",
+			"lessonType": "Tipo de lección principal"
 		}
 		
 		Requisitos:
@@ -130,12 +141,20 @@ export async function generateSuccessFact(date: string): Promise<SuccessFact> {
 		- El keyTakeaway debe ser específico y aplicable
 		- Usa un tono profesional pero accesible
 		- Máximo 200 palabras por campo
+		${selectedCategories && selectedCategories.length > 0 ? '- Prioriza que las categorías incluyan al menos una de las seleccionadas por el usuario' : ''}
+		
+		Categorías disponibles: tecnologia, retail, financiamiento, liderazgo, innovacion, marketing, operaciones, expansion, startup, estrategia
+		Industrias: Software, Hardware, Internet, Comercio Electrónico, Finanzas, Manufactura, Retail, Entretenimiento, Medios, Telecomunicaciones, Automotriz, Salud, Educación, Bienes Raíces, Energía, Transporte, Alimentación, Moda, Deportes, Turismo
+		Tipo de lección: Visión y Estrategia, Liderazgo, Innovación, Marketing, Operaciones, Finanzas, Recursos Humanos, Expansión, Competencia, Cliente, Producto, Cultura Empresarial, Partnerships, Adquisiciones, Crisis Management
 		
 		Ejemplo de formato:
 		{
 			"event": "En 1994, Jeff Bezos fundó Amazon.com en su garaje en Seattle, comenzando como una librería online.",
 			"lesson": "Bezos identificó que internet crecía un 2,300% anual y decidió actuar inmediatamente. No esperó el momento perfecto, sino que comenzó con un producto simple (libros) para validar su visión del comercio electrónico.",
-			"keyTakeaway": "Empieza con un producto mínimo viable en un mercado en crecimiento. La perfección es enemiga del progreso."
+			"keyTakeaway": "Empieza con un producto mínimo viable en un mercado en crecimiento. La perfección es enemiga del progreso.",
+			"categories": ["startup", "tecnologia", "estrategia"],
+			"industry": "Comercio Electrónico",
+			"lessonType": "Visión y Estrategia"
 		}
 		`
 
@@ -156,7 +175,10 @@ export async function generateSuccessFact(date: string): Promise<SuccessFact> {
 		return {
 			event: "En esta fecha, miles de empresarios alrededor del mundo están tomando decisiones que cambiarán el futuro.",
 			lesson: "Cada día es una oportunidad para aprender de los grandes éxitos del pasado y aplicar esas lecciones a tu propio emprendimiento. Los patrones del éxito se repiten: visión clara, ejecución rápida, enfoque en el cliente y perseverancia.",
-			keyTakeaway: "El éxito empresarial no es suerte, es el resultado de decisiones estratégicas consistentes. Estudia el pasado, actúa en el presente, construye el futuro."
+			keyTakeaway: "El éxito empresarial no es suerte, es el resultado de decisiones estratégicas consistentes. Estudia el pasado, actúa en el presente, construye el futuro.",
+			categories: ["estrategia", "liderazgo"],
+			industry: "General",
+			lessonType: "Visión y Estrategia"
 		}
 	}
 }
