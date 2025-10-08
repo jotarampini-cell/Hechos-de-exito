@@ -190,14 +190,31 @@ export default async function Home() {
               <span className="text-sm font-medium text-primary">Para Empresarios Curiosos</span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground tracking-tight text-balance">
-              Hechos de Éxito
-            </h1>
+            <div className="relative">
+              {/* Partículas flotantes alrededor del título */}
+              <div className="absolute -top-4 -left-4 w-2 h-2 bg-cyan-400/60 rounded-full animate-ping"></div>
+              <div className="absolute -top-2 -right-6 w-1 h-1 bg-blue-400/70 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+              <div className="absolute -bottom-2 -left-8 w-1.5 h-1.5 bg-purple-400/50 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
+              <div className="absolute -bottom-4 -right-4 w-1 h-1 bg-cyan-300/60 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
+              <div className="absolute top-1/2 -left-12 w-0.5 h-0.5 bg-blue-300/80 rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
+              <div className="absolute top-1/2 -right-12 w-0.5 h-0.5 bg-purple-300/70 rounded-full animate-pulse" style={{animationDelay: '2.5s'}}></div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance title-premium relative z-20">
+                <span className="word-animate relative z-30">Hechos</span>{" "}
+                <span className="word-animate relative z-30">de</span>{" "}
+                <span className="word-animate relative z-30">Éxito</span>
+              </h1>
+            </div>
 
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed text-pretty">
-              Descubre las lecciones empresariales más valiosas de la historia. Cada día, un nuevo aprendizaje que
-              transformó industrias y creó imperios.
-            </p>
+            <div className="relative">
+              {/* Resplandor de fondo para el subtítulo */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-blue-500/5 to-purple-500/5 rounded-2xl blur-sm opacity-0 animate-pulse" style={{animationDelay: '2s'}}></div>
+              
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed text-pretty subtitle-premium relative z-10 px-4 py-2">
+                Descubre las lecciones empresariales más valiosas de la historia. Cada día, un nuevo aprendizaje que
+                transformó industrias y creó imperios.
+              </p>
+            </div>
 
             <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">

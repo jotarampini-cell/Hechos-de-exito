@@ -146,4 +146,224 @@
       transform: translate(-5%, 5%) scale(0.95);
     }
   }
+
+  /* Animaciones premium para botones */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%) skewX(-12deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-12deg);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 0 40px rgba(6, 182, 212, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.5), 0 0 60px rgba(6, 182, 212, 0.2);
+    }
+  }
+
+  @keyframes particle-float {
+    0%, 100% {
+      transform: translateY(0px) scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(-4px) scale(1.2);
+      opacity: 1;
+    }
+  }
+
+  /* Clases de utilidad para animaciones premium */
+  .premium-shimmer {
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  .premium-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .premium-glow {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  .premium-particle {
+    animation: particle-float 2s ease-in-out infinite;
+  }
+
+  /* Efectos de hover mejorados */
+  .premium-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .premium-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .premium-button:hover::before {
+    left: 100%;
+  }
+
+  /* Efectos para títulos */
+  @keyframes title-glow {
+    0%, 100% {
+      text-shadow: 
+        0 0 10px rgba(6, 182, 212, 0.3),
+        0 0 20px rgba(6, 182, 212, 0.2),
+        0 0 30px rgba(6, 182, 212, 0.1);
+    }
+    50% {
+      text-shadow: 
+        0 0 20px rgba(6, 182, 212, 0.5),
+        0 0 40px rgba(6, 182, 212, 0.3),
+        0 0 60px rgba(6, 182, 212, 0.2);
+    }
+  }
+
+  @keyframes title-shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  @keyframes subtitle-fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes word-by-word {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) rotateX(90deg);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg);
+    }
+  }
+
+  @keyframes gradient-shift-text {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Clases para efectos de título */
+  .title-premium {
+    color: #1e293b; /* Color sólido oscuro para legibilidad */
+    text-shadow: 
+      0 0 10px rgba(6, 182, 212, 0.3),
+      0 0 20px rgba(6, 182, 212, 0.2),
+      0 0 30px rgba(6, 182, 212, 0.1);
+    animation: title-glow 3s ease-in-out infinite;
+    position: relative;
+  }
+
+  .dark .title-premium {
+    color: #f8fafc; /* Color claro para modo oscuro */
+  }
+
+  .title-premium::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -20px;
+    right: -20px;
+    bottom: -10px;
+    background: linear-gradient(45deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+    background-size: 300% 300%;
+    border-radius: 20px;
+    animation: gradient-shift-text 4s ease infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .title-premium::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background-size: 200% 100%;
+    animation: title-shimmer 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .subtitle-premium {
+    animation: subtitle-fade-in 1.5s ease-out 0.5s both;
+    position: relative;
+  }
+
+  .subtitle-premium::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6);
+    animation: subtitle-underline 2s ease-out 1.5s forwards;
+  }
+
+  @keyframes subtitle-underline {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  .word-animate {
+    display: inline-block;
+    animation: word-by-word 0.8s ease-out both;
+  }
+
+  .word-animate:nth-child(1) { animation-delay: 0.1s; }
+  .word-animate:nth-child(2) { animation-delay: 0.2s; }
+  .word-animate:nth-child(3) { animation-delay: 0.3s; }
+  .word-animate:nth-child(4) { animation-delay: 0.4s; }
+  .word-animate:nth-child(5) { animation-delay: 0.5s; }
+  .word-animate:nth-child(6) { animation-delay: 0.6s; }
+  .word-animate:nth-child(7) { animation-delay: 0.7s; }
+  .word-animate:nth-child(8) { animation-delay: 0.8s; }
+  .word-animate:nth-child(9) { animation-delay: 0.9s; }
+  .word-animate:nth-child(10) { animation-delay: 1.0s; }
 }
