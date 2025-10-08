@@ -41,3 +41,5 @@ jobs:
         vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
         vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
         vercel-args: '--prod'
+      env:
+        GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}

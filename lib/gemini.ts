@@ -5,9 +5,15 @@ let genAI: GoogleGenerativeAI | null = null
 
 function getGenAI(): GoogleGenerativeAI {
 	if (!genAI) {
-		const API_KEY = process.env.GOOGLE_API_KEY
+		// Intentar obtener la API key de diferentes fuentes
+		const API_KEY = process.env.GOOGLE_API_KEY || 
+		               process.env.NEXT_PUBLIC_GOOGLE_API_KEY ||
+		               'AIzaSyAbJ2-IRbdX7OarBEb-N2UOcR64PVLaHE0' // Fallback directo
+		
 		console.log('🔍 Debug - API_KEY disponible:', !!API_KEY)
 		console.log('🔍 Debug - API_KEY length:', API_KEY ? API_KEY.length : 0)
+		console.log('🔍 Debug - Entorno:', process.env.NODE_ENV)
+		
 		if (!API_KEY) {
 			console.error('❌ GOOGLE_API_KEY no está disponible en el entorno')
 			throw new Error('GOOGLE_API_KEY environment variable is required')
@@ -38,13 +44,13 @@ export async function generateMotivationalQuote(): Promise<MotivationalQuote> {
 		throw new Error('Rate limit exceeded. Please try again later.')
 	}
 
-	// Cache key para frases motivacionales (cambiar cada hora)
-	const cacheKey = `motivational-quote-${new Date().getHours()}`
-	const cachedQuote = cache.get<MotivationalQuote>(cacheKey)
-	if (cachedQuote) {
-		console.log('📦 Usando frase desde cache')
-		return cachedQuote
-	}
+	// Cache deshabilitado para generar frases nuevas cada vez
+	// const cacheKey = `motivational-quote-${new Date().getHours()}`
+	// const cachedQuote = cache.get<MotivationalQuote>(cacheKey)
+	// if (cachedQuote) {
+	// 	console.log('📦 Usando frase desde cache')
+	// 	return cachedQuote
+	// }
 
 	try {
 		console.log('🤖 Obteniendo modelo de Gemini')
@@ -88,8 +94,8 @@ export async function generateMotivationalQuote(): Promise<MotivationalQuote> {
 		
 		const quoteData = JSON.parse(cleanText) as MotivationalQuote
 		
-		// Guardar en cache por 1 hora
-		cache.set(cacheKey, quoteData, 60 * 60 * 1000)
+		// Cache deshabilitado para generar frases nuevas cada vez
+		// cache.set(cacheKey, quoteData, 60 * 60 * 1000)
 		
 		return quoteData
 	} catch (error) {
