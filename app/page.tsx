@@ -234,7 +234,7 @@ export default function Home() {
     }
 
     loadTodaysFact()
-  }, [])
+  }, [selectedCategories])
 
   if (isLoading && !fact) {
     return (

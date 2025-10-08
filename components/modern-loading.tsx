@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 
 interface ModernLoadingProps {
 	message?: string
@@ -24,7 +24,7 @@ export function ModernLoading({
 	const [currentQuote, setCurrentQuote] = useState("")
 
 	// Emojis y mensajes específicos por categoría
-	const categoryEmojis: Record<string, string[]> = {
+	const categoryEmojis: Record<string, string[]> = useMemo(() => ({
 		tecnologia: ["💻", "🚀", "⚡", "🔬", "🌐", "📱", "🤖", "💾"],
 		retail: ["🛍️", "🏪", "💰", "📊", "🎯", "💳", "🛒", "📈"],
 		financiamiento: ["💰", "📈", "💎", "🏦", "💼", "📊", "💵", "📉"],
@@ -35,9 +35,9 @@ export function ModernLoading({
 		expansion: ["🌍", "🚀", "📈", "💎", "🌟", "⚡", "🗺️", "🌎"],
 		startup: ["🚀", "💡", "⚡", "🌟", "💪", "🎯", "🔥", "💎"],
 		estrategia: ["🎯", "🧠", "📊", "⚡", "🌟", "💡", "♟️", "🎲"]
-	}
+	}), [])
 
-	const categoryMessages: Record<string, string[]> = {
+	const categoryMessages: Record<string, string[]> = useMemo(() => ({
 		tecnologia: [
 			"Explorando el mundo digital...",
 			"Descubriendo innovaciones tech...",
@@ -118,7 +118,7 @@ export function ModernLoading({
 			"Casi listo con estrategia...",
 			"¡Preparando hechos estratégicos increíbles!"
 		]
-	}
+	}), [])
 
 	// Emojis y mensajes por defecto
 	const defaultEmojis = ["🚀", "💡", "⚡", "🎯", "✨", "🌟", "💫", "🔥", "🎉", "🎊"]
@@ -133,7 +133,7 @@ export function ModernLoading({
 	]
 
 	// Frases motivacionales empresariales
-	const motivationalQuotes = [
+	const motivationalQuotes = useMemo(() => [
 		"La paciencia es la clave del éxito empresarial 💼",
 		"La innovación distingue entre un líder y un seguidor 🚀",
 		"El éxito es la suma de pequeños esfuerzos repetidos día tras día 💪",
@@ -169,7 +169,7 @@ export function ModernLoading({
 		"El networking es trabajar tu red antes de necesitarla 🕸️",
 		"La paciencia y la persistencia superan la inteligencia 🧘‍♂️",
 		"Los grandes líderes son grandes oyentes 👂"
-	]
+	], [])
 
 	// Seleccionar emojis y mensajes según el contexto
 	const emojis = isCategoryLoading && categoryName && categoryEmojis[categoryName] 
@@ -185,7 +185,7 @@ export function ModernLoading({
 		const randomIndex = Math.floor(Math.random() * motivationalQuotes.length)
 		setCurrentQuoteIndex(randomIndex)
 		setCurrentQuote(motivationalQuotes[randomIndex])
-	}, [])
+	}, [motivationalQuotes])
 
 	useEffect(() => {
 		// Simular progreso
@@ -219,7 +219,7 @@ export function ModernLoading({
 			clearInterval(progressInterval)
 			clearInterval(messageInterval)
 		}
-	}, [])
+	}, [messages, progress])
 
 	return (
 		<div className={`bg-card/95 backdrop-blur-sm rounded-xl p-8 md:p-12 shadow-xl border-0 ${className}`}>
@@ -244,7 +244,7 @@ export function ModernLoading({
 				<div className="text-center max-w-3xl">
 					<div className="bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-xl p-6 border border-cyan-500/20">
 						<p className="text-2xl font-bold text-foreground italic text-shimmer">
-							"{currentQuote}"
+							&ldquo;{currentQuote}&rdquo;
 						</p>
 					</div>
 				</div>
@@ -292,7 +292,7 @@ export function CategoryLoading({ categoryName, className = "" }: CategoryLoadin
 	const [currentEmoji, setCurrentEmoji] = useState("🎯")
 	const [currentMessage, setCurrentMessage] = useState("Buscando hechos increíbles...")
 
-	const categoryEmojis: Record<string, string[]> = {
+	const categoryEmojis: Record<string, string[]> = useMemo(() => ({
 		tecnologia: ["💻", "🚀", "⚡", "🔬", "🌐", "📱"],
 		retail: ["🛍️", "🏪", "💰", "📊", "🎯", "💳"],
 		financiamiento: ["💰", "📈", "💎", "🏦", "💼", "📊"],
@@ -303,9 +303,9 @@ export function CategoryLoading({ categoryName, className = "" }: CategoryLoadin
 		expansion: ["🌍", "🚀", "📈", "💎", "🌟", "⚡"],
 		startup: ["🚀", "💡", "⚡", "🌟", "💪", "🎯"],
 		estrategia: ["🎯", "🧠", "📊", "⚡", "🌟", "💡"]
-	}
+	}), [])
 
-	const categoryMessages: Record<string, string[]> = {
+	const categoryMessages: Record<string, string[]> = useMemo(() => ({
 		tecnologia: [
 			"Explorando el mundo digital...",
 			"Descubriendo innovaciones...",
@@ -366,7 +366,7 @@ export function CategoryLoading({ categoryName, className = "" }: CategoryLoadin
 			"Descubriendo tácticas exitosas...",
 			"Casi listo con estrategia..."
 		]
-	}
+	}), [])
 
 	useEffect(() => {
 		if (!categoryName) return
@@ -388,7 +388,7 @@ export function CategoryLoading({ categoryName, className = "" }: CategoryLoadin
 			clearInterval(emojiInterval)
 			clearInterval(messageInterval)
 		}
-	}, [categoryName])
+	}, [categoryName, categoryEmojis, categoryMessages])
 
 	return (
 		<div className={`bg-card/95 backdrop-blur-sm rounded-xl p-8 md:p-12 shadow-xl border-0 ${className}`}>
