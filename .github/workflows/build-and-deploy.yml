@@ -1,4 +1,4 @@
-name: CI/CD Pipeline - No Cache
+name: Build and Deploy
 
 on:
   push:
@@ -52,5 +52,3 @@ jobs:
         vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
         vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
         vercel-args: '--prod'
-
-
