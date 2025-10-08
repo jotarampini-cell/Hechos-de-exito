@@ -105,9 +105,9 @@ export function CategoryFilter({
 								variant={isSelected ? "default" : "outline"}
 								size="sm"
 								onClick={() => toggleCategory(category.id)}
-								className={`justify-center h-12 w-full ${
+								className={`justify-center h-12 w-full category-button ${
 									isSelected 
-										? `${category.color} text-white hover:opacity-80` 
+										? `selected ${category.color} text-white hover:opacity-80` 
 										: 'hover:bg-secondary/50'
 								} transition-all duration-200`}
 							>
@@ -135,9 +135,9 @@ export function CategoryFilter({
 								variant={isSelected ? "default" : "outline"}
 								size="sm"
 								onClick={() => toggleCategory(category.id)}
-								className={`${
+								className={`category-button ${
 									isSelected 
-										? `${category.color} text-white hover:opacity-80` 
+										? `selected ${category.color} text-white hover:opacity-80` 
 										: 'hover:bg-secondary/50'
 								} transition-all duration-200`}
 							>

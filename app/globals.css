@@ -66,6 +66,129 @@
   border: 1px solid rgba(71, 85, 105, 0.2);
 }
 
+/* Mejoras de visibilidad para modo oscuro */
+.dark {
+  /* Iconos y elementos de interfaz */
+  .lucide {
+    color: #e2e8f0 !important;
+  }
+  
+  /* Textos secundarios */
+  .text-muted-foreground {
+    color: #94a3b8 !important;
+  }
+  
+  /* Bordes y separadores */
+  .border-border {
+    border-color: #475569 !important;
+  }
+  
+  /* Botones y elementos interactivos */
+  .bg-primary {
+    background-color: #3b82f6 !important;
+  }
+  
+  .text-primary {
+    color: #60a5fa !important;
+  }
+  
+  /* Cards y contenedores */
+  .bg-card {
+    background-color: rgba(30, 41, 59, 0.8) !important;
+    border: 1px solid rgba(71, 85, 105, 0.3) !important;
+  }
+  
+  /* Badges y etiquetas */
+  .bg-secondary {
+    background-color: #334155 !important;
+    color: #e2e8f0 !important;
+  }
+  
+  /* Enlaces y elementos clickeables */
+  a, button {
+    color: #60a5fa !important;
+  }
+  
+  /* Inputs y formularios */
+  .bg-input {
+    background-color: #1e293b !important;
+    border-color: #475569 !important;
+    color: #e2e8f0 !important;
+  }
+  
+  /* Progress bars */
+  .bg-progress {
+    background-color: #334155 !important;
+  }
+  
+  /* Shadows y efectos */
+  .shadow-sm {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  .shadow {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* Filtro de categorías específico */
+  .category-button {
+    background-color: #1e293b !important;
+    border: 1px solid #475569 !important;
+    color: #e2e8f0 !important;
+  }
+  
+  .category-button:hover {
+    background-color: #334155 !important;
+    border-color: #64748b !important;
+  }
+  
+  .category-button.selected {
+    background-color: #3b82f6 !important;
+    border-color: #60a5fa !important;
+    color: #ffffff !important;
+  }
+  
+  /* Badges en modo oscuro */
+  .bg-primary\/10 {
+    background-color: rgba(59, 130, 246, 0.2) !important;
+    color: #60a5fa !important;
+  }
+  
+  /* Botones de acción */
+  .bg-background {
+    background-color: #0f172a !important;
+  }
+  
+  /* Textos de información */
+  .text-foreground {
+    color: #f8fafc !important;
+  }
+  
+  /* Título "La Lección" en modo oscuro */
+  .text-accent {
+    color: #60a5fa !important;
+  }
+  
+  /* Botón "Frase de Hoy" en modo oscuro */
+  .premium-button {
+    background: linear-gradient(135deg, #334155 0%, #475569 100%) !important;
+    border: 1px solid #64748b !important;
+    color: #e2e8f0 !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  .premium-button:hover {
+    background: linear-gradient(135deg, #475569 0%, #64748b 100%) !important;
+    border-color: #94a3b8 !important;
+    color: #f8fafc !important;
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2) !important;
+  }
+}
+
 :root {
   /* Tema moderno inspirado en Google con colores vibrantes */
   --background: oklch(0.99 0.005 106);

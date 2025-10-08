@@ -21,9 +21,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 		if (savedTheme) {
 			setTheme(savedTheme)
 		} else {
-			// Detectar preferencia del sistema
-			const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-			setTheme(prefersDark ? "dark" : "light")
+			// Modo claro como predeterminado
+			setTheme("light")
 		}
 		setMounted(true)
 	}, [])
