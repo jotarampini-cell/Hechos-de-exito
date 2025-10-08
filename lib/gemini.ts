@@ -6,10 +6,14 @@ let genAI: GoogleGenerativeAI | null = null
 function getGenAI(): GoogleGenerativeAI {
 	if (!genAI) {
 		const API_KEY = process.env.GOOGLE_API_KEY
+		console.log('🔍 Debug - API_KEY disponible:', !!API_KEY)
+		console.log('🔍 Debug - API_KEY length:', API_KEY ? API_KEY.length : 0)
 		if (!API_KEY) {
+			console.error('❌ GOOGLE_API_KEY no está disponible en el entorno')
 			throw new Error('GOOGLE_API_KEY environment variable is required')
 		}
 		genAI = new GoogleGenerativeAI(API_KEY)
+		console.log('✅ GoogleGenerativeAI inicializado correctamente')
 	}
 	return genAI
 }
@@ -26,6 +30,8 @@ export interface MotivationalQuote {
 }
 
 export async function generateMotivationalQuote(): Promise<MotivationalQuote> {
+	console.log('🚀 Iniciando generateMotivationalQuote')
+	
 	// Rate limiting
 	const clientId = 'default' // En producción, usar IP o user ID
 	if (!rateLimiter.isAllowed(clientId, 20, 60000)) { // 20 requests por minuto
@@ -36,10 +42,12 @@ export async function generateMotivationalQuote(): Promise<MotivationalQuote> {
 	const cacheKey = `motivational-quote-${new Date().getHours()}`
 	const cachedQuote = cache.get<MotivationalQuote>(cacheKey)
 	if (cachedQuote) {
+		console.log('📦 Usando frase desde cache')
 		return cachedQuote
 	}
 
 	try {
+		console.log('🤖 Obteniendo modelo de Gemini')
 		const model = getGenAI().getGenerativeModel({ model: 'gemini-2.0-flash-exp' })
 		
 		const prompt = `
