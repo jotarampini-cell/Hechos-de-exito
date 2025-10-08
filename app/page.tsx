@@ -36,6 +36,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Facebook comenzó con un nicho muy específico (estudiantes de Harvard) antes de expandirse. Esta estrategia permitió perfeccionar el producto y crear una base de usuarios leales antes de escalar.",
     keyTakeaway:
       "Domina un nicho pequeño antes de expandirte. Es mejor ser el número uno en un mercado pequeño que el número diez en uno grande.",
+    categories: ["startup", "tecnologia", "estrategia"],
+    industry: "Redes Sociales",
+    lessonType: "Estrategia de Mercado"
   },
   "3-13": {
     event:
@@ -44,6 +47,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Microsoft se enfocó en crear software para el mercado masivo de PC, no solo para empresas. Gates entendió que el verdadero valor estaba en el software, no en el hardware.",
     keyTakeaway:
       "Identifica dónde está el verdadero valor en tu industria. A veces, el dinero está en lo que otros consideran secundario.",
+    categories: ["financiamiento", "tecnologia", "estrategia"],
+    industry: "Software",
+    lessonType: "Valor y Estrategia"
   },
   "4-1": {
     event:
@@ -52,6 +58,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Apple no necesitó grandes recursos para empezar. Con habilidades complementarias (Wozniak en ingeniería, Jobs en visión y ventas), crearon el Apple I vendiendo 50 unidades a $666.66 cada una para financiar el siguiente modelo.",
     keyTakeaway:
       "No necesitas capital masivo para empezar. Necesitas un equipo complementario y la capacidad de reinvertir tus primeras ganancias.",
+    categories: ["startup", "tecnologia", "liderazgo"],
+    industry: "Hardware",
+    lessonType: "Fundación y Liderazgo"
   },
   "4-4": {
     event:
@@ -60,6 +69,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Gates y Allen vieron una oportunidad cuando apareció el Altair 8800 sin software. Crearon un intérprete BASIC sin siquiera tener la computadora, demostrándolo exitosamente después. Actuaron rápido ante la oportunidad.",
     keyTakeaway:
       "Cuando veas una oportunidad clara en el mercado, actúa con velocidad. La ejecución rápida supera a la planificación perfecta.",
+    categories: ["startup", "tecnologia", "estrategia"],
+    industry: "Software",
+    lessonType: "Oportunidad y Ejecución"
   },
   "5-1": {
     event:
@@ -68,6 +80,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Starbucks no vendía café preparado inicialmente, solo granos. Howard Schultz transformó el concepto años después al crear el 'tercer lugar' entre casa y trabajo, vendiendo experiencia, no solo café.",
     keyTakeaway:
       "No vendas solo productos, vende experiencias y estilo de vida. La gente paga más por cómo los hace sentir tu marca.",
+    categories: ["retail", "marketing", "liderazgo"],
+    industry: "Alimentación y Bebidas",
+    lessonType: "Marketing y Experiencia"
   },
   "6-16": {
     event: "En 1903, Henry Ford fundó Ford Motor Company con $28,000 de 12 inversionistas.",
@@ -75,6 +90,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Ford revolucionó la manufactura con la línea de ensamblaje, reduciendo el tiempo de producción de 12 horas a 93 minutos. Además, pagó a sus trabajadores $5 al día (el doble del promedio), creando clientes que podían comprar sus propios productos.",
     keyTakeaway:
       "La eficiencia operacional y tratar bien a tus empleados no son gastos, son inversiones que generan ventajas competitivas sostenibles.",
+    categories: ["operaciones", "liderazgo", "innovacion"],
+    industry: "Automotriz",
+    lessonType: "Operaciones y Liderazgo"
   },
   "7-5": {
     event:
@@ -83,6 +101,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Bezos usó el 'marco de minimización del arrepentimiento': imaginó tener 80 años y preguntándose si se arrepentiría de no intentarlo. La respuesta fue clara. Calculó que tenía 70% de probabilidad de fracasar, pero el 30% de éxito valía la pena.",
     keyTakeaway:
       "Las mejores decisiones empresariales a menudo requieren valentía para dejar la seguridad. Pregúntate: ¿de qué te arrepentirás más, intentarlo o no intentarlo?",
+    categories: ["startup", "liderazgo", "estrategia"],
+    industry: "Comercio Electrónico",
+    lessonType: "Toma de Decisiones"
   },
   "8-15": {
     event: "En 1995, Pierre Omidyar fundó eBay (originalmente AuctionWeb) como un experimento personal.",
@@ -90,6 +111,9 @@ const successFacts: Record<string, SuccessFact> = {
       "eBay comenzó cuando Omidyar quiso crear un mercado perfecto donde compradores y vendedores pudieran conectarse directamente. El primer artículo vendido fue un puntero láser roto por $14.83, demostrando que hay mercado para todo.",
     keyTakeaway:
       "Crea plataformas que conecten oferta y demanda. Los modelos de marketplace pueden escalar exponencialmente porque el valor crece con cada usuario.",
+    categories: ["startup", "tecnologia", "estrategia"],
+    industry: "Marketplace",
+    lessonType: "Modelo de Negocio"
   },
   "9-4": {
     event: "En 1998, Larry Page y Sergey Brin fundaron Google en un garaje en Menlo Park, California.",
@@ -97,6 +121,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Google no fue el primer buscador, pero fue el mejor. Su algoritmo PageRank analizaba la calidad de los enlaces, no solo las palabras clave. Se enfocaron obsesivamente en dar los mejores resultados, incluso si eso significaba que los usuarios salieran rápido de Google.",
     keyTakeaway:
       "Enfócate en ser el mejor en una cosa específica, no el primero. La calidad superior siempre gana a largo plazo.",
+    categories: ["tecnologia", "innovacion", "estrategia"],
+    industry: "Búsqueda y Tecnología",
+    lessonType: "Calidad y Producto"
   },
   "9-27": {
     event:
@@ -105,6 +132,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Bechtolsheim escribió el cheque después de una demostración de 30 minutos, antes de que Google fuera siquiera una empresa legal. La claridad de la visión y la demostración del producto fueron suficientes para conseguir financiamiento.",
     keyTakeaway:
       "Un producto funcional que resuelve un problema real vale más que mil presentaciones. Demuestra, no solo cuentes.",
+    categories: ["financiamiento", "tecnologia", "startup"],
+    industry: "Búsqueda y Tecnología",
+    lessonType: "Financiamiento y Demostración"
   },
   "10-7": {
     event:
@@ -113,6 +143,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Apple no inventó el reproductor MP3, pero creó la mejor experiencia completa: hardware elegante, software intuitivo (iTunes) y un ecosistema cerrado que funcionaba perfectamente junto. Controlaron toda la cadena de valor.",
     keyTakeaway:
       "Controla la experiencia completa del cliente. La integración vertical te permite ofrecer calidad superior y márgenes más altos.",
+    categories: ["innovacion", "tecnologia", "estrategia"],
+    industry: "Hardware y Software",
+    lessonType: "Ecosistema y Control"
   },
   "11-19": {
     event: "En 1985, Microsoft lanzó Windows 1.0, iniciando la era de las interfaces gráficas para el público masivo.",
@@ -120,6 +153,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Windows no fue técnicamente superior a otros sistemas, pero Microsoft lo hizo accesible y compatible con miles de aplicaciones. Se enfocaron en crear un ecosistema donde desarrolladores quisieran construir.",
     keyTakeaway:
       "Crea plataformas donde otros puedan construir. El efecto de red de desarrolladores y aplicaciones crea barreras de entrada insuperables.",
+    categories: ["tecnologia", "estrategia", "innovacion"],
+    industry: "Software",
+    lessonType: "Ecosistema y Compatibilidad"
   },
   "12-12": {
     event:
@@ -128,6 +164,9 @@ const successFacts: Record<string, SuccessFact> = {
       "Apple compartió el éxito con sus empleados mediante opciones sobre acciones. Esto no solo creó riqueza, sino lealtad y motivación extrema. Los empleados trabajaban como dueños porque lo eran.",
     keyTakeaway:
       "Comparte el éxito con tu equipo. Las opciones sobre acciones alinean incentivos y convierten empleados en socios comprometidos con el crecimiento.",
+    categories: ["financiamiento", "liderazgo", "estrategia"],
+    industry: "Hardware",
+    lessonType: "Participación y Liderazgo"
   },
 }
 
